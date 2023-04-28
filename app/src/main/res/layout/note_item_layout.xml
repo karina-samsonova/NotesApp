@@ -42,7 +42,8 @@
                     android:text="Title"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/itemContent"
