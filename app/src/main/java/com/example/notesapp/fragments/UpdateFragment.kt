@@ -40,6 +40,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.lang.Math.max
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -184,7 +185,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
                             0,
                             binding.noteTitle.text.toString(),
                             binding.noteContent.getMD(),
-                            currentDate
+                            currentDate,
                         )
                     )
                     result = "noteSaved"
@@ -206,7 +207,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
                     note!!.id,
                     binding.noteTitle.text.toString(),
                     binding.noteContent.getMD(),
-                    currentDate
+                    currentDate,
                 )
             )
         }

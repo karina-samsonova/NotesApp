@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
+        android:paddingTop="20dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Создание папки"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/itemName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="@color/black"
+            android:hint="Имя папки..."
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <HorizontalScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="15dp"
+            android:scrollbars="none"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemName">
+
+            <RadioGroup
+                android:id="@+id/colorPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb0"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/black" />
+
+                <RadioButton
+                    android:id="@+id/rb1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/red" />
+
+                <RadioButton
+                    android:id="@+id/rb2"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/orange" />
+
+                <RadioButton
+                    android:id="@+id/rb3"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/yellow" />
+
+                <RadioButton
+                    android:id="@+id/rb4"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/green" />
+
+                <RadioButton
+                    android:id="@+id/rb5"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/dark_teal" />
+
+                <RadioButton
+                    android:id="@+id/rb6"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/light_teal" />
+
+                <RadioButton
+                    android:id="@+id/rb7"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/pink" />
+
+                <RadioButton
+                    android:id="@+id/rb8"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/purple" />
+
+                <RadioButton
+                    android:id="@+id/rb9"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/blue" />
+
+                <RadioButton
+                    android:id="@+id/rb10"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/dark_blue" />
+
+                <RadioButton
+                    android:id="@+id/rb11"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/gray" />
+
+                <RadioButton
+                    android:id="@+id/rb12"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_margin="3dp"
+                    android:button="@drawable/color_picker_item"
+                    android:buttonTint="@color/brown" />
+            </RadioGroup>
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginStart="20dp"
+            android:fontFamily="@font/montserrat_regular"
+            android:text="Отмена"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollView" />
+
+        <TextView
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginEnd="20dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Сохранить"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

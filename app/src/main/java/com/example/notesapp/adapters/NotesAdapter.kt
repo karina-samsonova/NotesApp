@@ -55,14 +55,7 @@ class NotesAdapter: ListAdapter<Note, NotesAdapter.NotesViewHolder>(DiffUtilCall
                 markWon.setMarkdown(content, note.content)
                 date.text = note.date
 
-                itemView.setOnClickListener {
-                    val action=NoteFragmentDirections.actionNoteFragmentToUpdateFragment()
-                        .setNote(note)
-                    val extras= FragmentNavigatorExtras(parent to "recyclerView_${note.id}")
-                    it.hideKeyboard()
-                    Navigation.findNavController(it).navigate(action, extras)
-                }
-                content.setOnClickListener {
+                parent.setOnClickListener {
                     val action=NoteFragmentDirections.actionNoteFragmentToUpdateFragment()
                         .setNote(note)
                     val extras= FragmentNavigatorExtras(parent to "recyclerView_${note.id}")

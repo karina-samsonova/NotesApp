@@ -12,10 +12,10 @@ data class Folder(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
 
-    @ColumnInfo(name = "title")
-    val title: String,
+    @ColumnInfo(name = "name")
+    val name: String,
 
     @ColumnInfo(name = "color")
-    val color: String,
+    val color: Int = 0,
 
-    ) : Serializable
+) : Serializable
