@@ -39,10 +39,10 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/montserrat_bold"
                     android:padding="5dp"
-                    android:text="Title"
+                    android:text="@string/note_title"
                     android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="24sp"
+                    android:textSize="18sp"
                     android:maxLines="1"/>
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:text="dd-mm-yy"
                     android:textAlignment="textStart"
                     android:textColor="@color/dark_gray"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     app:drawableStartCompat="@drawable/ic_outline_calendar_today_24" />
 
 

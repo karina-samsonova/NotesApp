@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">NotesApp</string>
-    <string name="my_notes">My Notes</string>
-    <string name="search_here">Search here....</string>
-    <string name="clear">clear</string>
-    <string name="no_data">no_data</string>
-    <string name="add_note">Add Note</string>
-    <string name="choose_color">Choose Color</string>
-    <string name="some_text">Lorem Ipsum is simply dummy text of
+    <string name="app_name" translatable="false">NotesApp</string>
+    <string name="my_notes" translatable="false">My Notes</string>
+    <string name="search_here">Поиск...</string>
+    <string name="clear" translatable="false">clear</string>
+    <string name="no_data" translatable="false">no_data</string>
+    <string name="add_note">Добавить заметку</string>
+    <string name="some_text" translatable="false">Lorem Ipsum is simply dummy text of
         the printing and typesetting industry. Lorem Ipsum has been
         the industry\'s standard dummy text ever since the 1500s,
         when an unknown printer took a galley of type and scrambled
@@ -14,7 +13,16 @@
         centuries, but also the leap into electronic typesetting,
         remaining essentially unchanged.
     </string>
-    <string name="edited_on">Edited on: %1$s</string>
+    <string name="create_folder">Создание категории</string>
+    <string name="folder_name">Имя категории...</string>
+    <string name="cancel">Отмена</string>
+    <string name="save">Сохранить</string>
+    <string name="all_notes">Все заметки</string>
+    <string name="all_folders">Все категории</string>
+    <string name="date">Дата</string>
+    <string name="note_title">Название заметки...</string>
+    <string name="note_content">Содержание заметки...</string>
+    <string name="choose_folder">Выбор категории</string>
+    <string name="generate">Сгенерировать категорию</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

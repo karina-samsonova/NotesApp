@@ -19,7 +19,8 @@ import com.example.notesapp.fragments.NoteFragment
 import com.example.notesapp.model.Folder
 import com.example.notesapp.viewModel.NoteViewModel
 
-class FoldersAdapter(val updateFolder: (Folder) -> Unit): ListAdapter<Folder, FoldersAdapter.FoldersViewHolder>(DiffUtilCallbackFolder()) {
+class FoldersAdapter(val updateFolder: (Folder) -> Unit, val recyclerViewDisplayFolder: (Int) -> Unit,
+val noteViewModel: NoteViewModel): ListAdapter<Folder, FoldersAdapter.FoldersViewHolder>(DiffUtilCallbackFolder()) {
     inner class FoldersViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private val binding = DrawerMenuItemBinding.bind(itemView)
         val name: TextView = binding.itemName
@@ -40,7 +41,7 @@ class FoldersAdapter(val updateFolder: (Folder) -> Unit): ListAdapter<Folder, Fo
                 icon.setColorFilter(palette[folder.color])
 
                 parent.setOnClickListener {
-                    Toast.makeText(parent.context, "Сlick detected", Toast.LENGTH_SHORT).show()
+                    recyclerViewDisplayFolder(folder.id)
                 }
                 parent.setOnLongClickListener{
                     updateFolder(folder)

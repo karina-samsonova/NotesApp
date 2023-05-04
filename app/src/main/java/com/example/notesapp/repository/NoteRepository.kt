@@ -2,6 +2,7 @@ package com.example.notesapp.repository
 
 import com.example.notesapp.database.NoteDatabase
 import com.example.notesapp.model.Folder
+import com.example.notesapp.model.FolderNote
 import com.example.notesapp.model.Note
 
 class NoteRepository(private val noteDatabase: NoteDatabase) {
@@ -23,4 +24,14 @@ class NoteRepository(private val noteDatabase: NoteDatabase) {
     suspend fun deleteFolder(folder: Folder) = noteDatabase.getFolderDao().deleteFolder(folder)
 
     suspend fun updateFolder(folder: Folder) = noteDatabase.getFolderDao().updateFolder(folder)
+
+    suspend fun insertFolderNote(folderNote: FolderNote) = noteDatabase.getFolderNoteDao().insertFolderNote(folderNote)
+
+    suspend fun deleteFolderNote(folderNote: FolderNote) = noteDatabase.getFolderNoteDao().deleteFolderNote(folderNote)
+
+    fun getNoteFolders(query: Int) = noteDatabase.getFolderNoteDao().getNoteFolders(query)
+
+    fun getFolderNotes(query: Int) = noteDatabase.getFolderNoteDao().getFolderNotes(query)
+
+    fun folderCount(query: Int) = noteDatabase.getFolderNoteDao().folderCount(query)
 }

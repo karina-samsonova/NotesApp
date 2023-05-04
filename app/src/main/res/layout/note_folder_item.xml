@@ -24,13 +24,15 @@
                 android:layout_height="60dp"
                 android:padding="5dp">
 
-                <ImageView
+                <com.google.android.material.checkbox.MaterialCheckBox
                     android:id="@+id/itemIcon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/folder_outline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginStart="30dp" />
+                    android:layout_marginStart="40dp"
+                    app:useMaterialThemeColors="false"
+                    android:buttonTint="@color/black"
+                    android:button="@drawable/checkbox_item"/>
 
                 <TextView
                     android:id="@+id/itemName"
@@ -41,13 +43,11 @@
                     android:textSize="18sp"
                     android:maxLines="1"
                     android:fontFamily="@font/montserrat_regular"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="10dp" />
+                    android:layout_centerVertical="true" />
 
 
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
-
 
     </RelativeLayout>
 </layout>

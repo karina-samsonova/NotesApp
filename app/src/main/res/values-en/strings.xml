@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="add_note">Add note</string>
+    <string name="search_here">Search...</string>
+    <string name="create_folder">Creating a category</string>
+    <string name="folder_name">Category name...</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="all_notes">All notes</string>
+    <string name="all_folders">All categories</string>
+    <string name="date">Date</string>
+    <string name="note_title">Note title...</string>
+    <string name="note_content">Note content...</string>
+    <string name="choose_folder">Choosing a category</string>
+    <string name="generate">Generate category</string>
+</resources>

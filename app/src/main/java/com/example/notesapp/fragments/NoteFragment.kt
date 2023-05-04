@@ -89,6 +89,10 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         binding.addFolder.setOnClickListener {
             addFolder()
         }
+        binding.syncBtn.setOnClickListener {
+            binding.drawerLayout.closeDrawer(binding.navView)
+            recyclerViewDisplay()
+        }
 
         recyclerViewDisplay()
         swipeToDelete(binding.mainPart.recyclerView)
@@ -315,14 +319,45 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
                 true
             }
         }
-        observerDataChanges()
+        noteViewModel.getAllNotes().observe(viewLifecycleOwner){ list->
+            binding.mainPart.noData.isVisible=list.isEmpty()
+            notesAdapter.submitList(list)
+        }
+    }
+
+    private fun recyclerViewDisplayFolder(folder_id: Int) {
+        when(resources.configuration.orientation){
+            Configuration.ORIENTATION_PORTRAIT -> setUpRecyclerViewFolder(2, folder_id)
+            Configuration.ORIENTATION_LANDSCAPE -> setUpRecyclerViewFolder(3, folder_id)
+        }
+    }
+
+    private fun setUpRecyclerViewFolder(spanCount: Int, folder_id: Int) {
+        binding.drawerLayout.closeDrawer(binding.navView)
+        binding.mainPart.recyclerView.apply{
+            layoutManager=StaggeredGridLayoutManager(spanCount, StaggeredGridLayoutManager.VERTICAL)
+            setHasFixedSize(true)
+            notesAdapter = NotesAdapter()
+            notesAdapter.stateRestorationPolicy=
+                RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
+            adapter = notesAdapter
+            postponeEnterTransition(300L, TimeUnit.MILLISECONDS)
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
+        }
+        noteViewModel.getFolderNotes(folder_id).observe(viewLifecycleOwner){ list->
+            binding.mainPart.noData.isVisible=list.isEmpty()
+            notesAdapter.submitList(list)
+        }
     }
 
     private fun setUpFolderView() {
         binding.rvNavDrawer.apply{
             layoutManager= LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(true)
-            foldersAdapter = FoldersAdapter(::updateFolder)
+            foldersAdapter = FoldersAdapter(::updateFolder, ::recyclerViewDisplayFolder, noteViewModel)
             foldersAdapter.stateRestorationPolicy=
                 RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
             adapter = foldersAdapter

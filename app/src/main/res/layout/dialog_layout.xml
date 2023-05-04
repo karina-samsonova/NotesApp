@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="350dp"
         android:layout_height="match_parent"
-        android:paddingTop="20dp">
+        android:paddingTop="10dp"
+        android:background="@drawable/creating_background">
 
         <TextView
             android:id="@+id/textView"
@@ -19,8 +20,9 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Создание папки"
+            android:text="@string/create_folder"
             android:textSize="18sp"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -30,10 +32,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"
             android:backgroundTint="@color/black"
-            android:hint="Имя папки..."
+            android:hint="@string/folder_name"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -166,9 +168,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:layout_marginStart="20dp"
             android:fontFamily="@font/montserrat_regular"
-            android:text="Отмена"
+            android:text="@string/cancel"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +180,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
-            android:layout_marginEnd="20dp"
             android:fontFamily="@font/montserrat_bold"
-            android:text="Сохранить"
+            android:text="@string/save"
             android:textSize="18sp"
+            android:textColor="#98BDFA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/scrollView" />
