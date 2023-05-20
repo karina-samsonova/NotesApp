@@ -293,7 +293,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     private fun saveNote() {
         if(binding.noteContent.text.toString().isEmpty() ||
             binding.noteTitle.text.toString().isEmpty()){
-            Toast.makeText(activity,"Something is empty", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,"Одно из полей не заполнено", Toast.LENGTH_SHORT).show()
         } else{
             note=args.note
             when(note){

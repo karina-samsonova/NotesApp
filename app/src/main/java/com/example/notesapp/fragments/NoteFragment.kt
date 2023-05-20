@@ -175,7 +175,7 @@ class NoteFragment : Fragment(R.layout.fragment_note) {
         dialog.show()
 
         val title = bindingDialog.findViewById<TextView>(R.id.textView)
-        title.setText("Редактирование папки")
+        title.setText("Редактирование категории")
         val colorPicker = bindingDialog.findViewById<RadioGroup>(R.id.colorPicker)
         colorPicker.check(colorPicker.getChildAt(folder.color).getId())
 
