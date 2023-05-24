@@ -12,25 +12,25 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.speech.RecognizerIntent
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.*
 import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.notesapp.R
 import com.example.notesapp.MainActivity
+import com.example.notesapp.R
 import com.example.notesapp.adapters.FolderNoteAdapter
 import com.example.notesapp.databinding.FragmentUpdateBinding
 import com.example.notesapp.model.Folder
@@ -42,12 +42,20 @@ import com.google.android.material.transition.MaterialContainerTransform
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import com.itextpdf.text.BaseColor
+import com.itextpdf.text.Document
+import com.itextpdf.text.Font
+import com.itextpdf.text.Paragraph
+import com.itextpdf.text.pdf.BaseFont
+import com.itextpdf.text.pdf.PdfWriter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class UpdateFragment : Fragment(R.layout.fragment_update) {
 
@@ -63,6 +71,9 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     private val REQUEST_CODE_SPEECH_INPUT = 1
     private val REQUEST_CODE_IMAGE_INPUT = 2
     private val REQUEST_CODE_CAMERA = 3
+    private val CREATE_TXT_FILE = 4
+    private val CREATE_JPG_FILE = 5
+    private val CREATE_PDF_FILE = 6
     val recognizer = TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS)
     private lateinit var foldersAdapter: FolderNoteAdapter
 
@@ -134,6 +145,23 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
             selectFolders()
         }
 
+        binding.saveFileBtn.setOnClickListener {
+            val popupMenu: PopupMenu = PopupMenu(activity,binding.saveFileBtn)
+            popupMenu.menuInflater.inflate(R.menu.popup_menu,popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.txt_file ->
+                        saveTxtFile()
+                    R.id.jpg_file ->
+                        saveJpgFile()
+                    R.id.pdf_file ->
+                        savePdfFile()
+                    }
+                true
+            })
+            popupMenu.show()
+        }
+
         try{
             binding.noteContent.setOnFocusChangeListener{_,hasFocus->
                 if(hasFocus){
@@ -148,6 +176,42 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
         ViewCompat.setTransitionName(binding.fragmentUpdateLayout, "recyclerView_${args.note?.id}")
 
         setUpNote()
+    }
+
+    private fun savePdfFile() {
+        val title = binding.noteTitle.text.toString()
+        val time = binding.noteDate.text.toString().filter { it.isDigit() }.takeLast(6)
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply{
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type="application/pdf"
+            putExtra(Intent.EXTRA_TITLE, title+"_"+time+".pdf")
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, "")
+        }
+        startActivityForResult(intent, CREATE_PDF_FILE)
+    }
+
+    private fun saveJpgFile() {
+        val title = binding.noteTitle.text.toString()
+        val time = binding.noteDate.text.toString().filter { it.isDigit() }.takeLast(6)
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply{
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type="image/jpg"
+            putExtra(Intent.EXTRA_TITLE, title+"_"+time+".jpg")
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, "")
+        }
+        startActivityForResult(intent, CREATE_JPG_FILE)
+    }
+
+    private fun saveTxtFile() {
+        val title = binding.noteTitle.text.toString()
+        val time = binding.noteDate.text.toString().filter { it.isDigit() }.takeLast(6)
+        val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+            addCategory(Intent.CATEGORY_OPENABLE)
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TITLE, title + "_" + time + ".txt")
+            putExtra(DocumentsContract.EXTRA_INITIAL_URI, "")
+        }
+        startActivityForResult(intent, CREATE_TXT_FILE)
     }
 
     private fun addFolder() {
@@ -168,7 +232,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
         val save_btn = bindingDialog.findViewById<TextView>(R.id.save)
         save_btn.setOnClickListener{
             if(itemName.text.isEmpty()){
-                Toast.makeText(activity,"Name field is empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity,R.string.empty_name, Toast.LENGTH_SHORT).show()
             }
             else{
                 noteViewModel.saveFolder(
@@ -186,7 +250,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     private fun selectFolders() {
         note = args.note
         if(note == null){
-            Toast.makeText(activity,"Сначала сохраните заметку", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,R.string.save_first, Toast.LENGTH_SHORT).show()
             return
         }
 
@@ -293,7 +357,7 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
     private fun saveNote() {
         if(binding.noteContent.text.toString().isEmpty() ||
             binding.noteTitle.text.toString().isEmpty()){
-            Toast.makeText(activity,"Одно из полей не заполнено", Toast.LENGTH_SHORT).show()
+            Toast.makeText(activity,R.string.empty, Toast.LENGTH_SHORT).show()
         } else{
             note=args.note
             when(note){
@@ -375,6 +439,68 @@ class UpdateFragment : Fragment(R.layout.fragment_update) {
                 val inpImage = InputImage.fromBitmap(photo, 0)
 
                 textRecognition(inpImage)
+            }
+        }
+        if (requestCode == CREATE_TXT_FILE) {
+            if (resultCode == RESULT_OK && data != null) {
+                val uri = data.data!!
+                try {
+                    val title = binding.noteTitle.text.toString()
+                    val content = binding.noteContent.getMD()
+                    val date = binding.noteDate.text.toString()
+                    val outputStream = requireContext().contentResolver.openOutputStream(uri)
+                    outputStream?.write((date+"\n"+title+"\n\n"+content).toByteArray())
+                    outputStream?.close()
+                    Toast.makeText(activity,R.string.saved, Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        if (requestCode == CREATE_JPG_FILE) {
+            if (resultCode == RESULT_OK && data != null) {
+                val uri = data.data!!
+                try {
+                    binding.noteFrame.isDrawingCacheEnabled = true
+                    binding.noteFrame.buildDrawingCache()
+                    val img = binding.noteFrame.drawingCache
+                    val outputStream = requireContext().contentResolver.openOutputStream(uri)
+                    img.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
+                    outputStream?.flush()
+                    outputStream?.close()
+                    Toast.makeText(activity,R.string.saved, Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+        }
+        if (requestCode == CREATE_PDF_FILE) {
+            if (resultCode == RESULT_OK && data != null) {
+                val uri = data.data!!
+                try {
+                    val title = binding.noteTitle.text.toString()
+                    val content = binding.noteContent.getMD()
+                    val date = binding.noteDate.text.toString()
+                    val outputStream = requireContext().contentResolver.openOutputStream(uri)
+                    val doc = Document()
+                    PdfWriter.getInstance(doc, outputStream)
+                    val dateBase = BaseFont.createFont("res/font/montserrat_italic.otf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED)
+                    val dateFont = Font(dateBase, 14f, Font.NORMAL, BaseColor.DARK_GRAY)
+                    val titleBase = BaseFont.createFont("res/font/montserrat_bold.otf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED)
+                    val titleFont = Font(titleBase, 24f, Font.NORMAL, BaseColor.BLACK)
+                    val contentBase = BaseFont.createFont("res/font/montserrat_regular.otf", BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED)
+                    val contentFont = Font(contentBase, 20f, Font.NORMAL, BaseColor.BLACK)
+                    doc.open()
+                    val paraGraph = Paragraph()
+                    paraGraph.add(Paragraph(date, dateFont))
+                    paraGraph.add(Paragraph(title, titleFont))
+                    paraGraph.add(Paragraph(content, contentFont))
+                    doc.add(paraGraph)
+                    doc.close()
+                    Toast.makeText(activity,R.string.saved, Toast.LENGTH_SHORT).show()
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
             }
         }
     }

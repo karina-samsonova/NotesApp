@@ -24,5 +24,12 @@
     <string name="note_content">Содержание заметки...</string>
     <string name="choose_folder">Выбор категории</string>
     <string name="generate">Сгенерировать категорию</string>
+    <string name="save_txt">Сохранить .txt файл</string>
+    <string name="save_pdf">Сохранить .pdf файл</string>
+    <string name="save_jpg">Сохранить .jpg файл</string>
+    <string name="saved">Сохранено</string>
+    <string name="empty">Одно из полей не заполнено</string>
+    <string name="save_first">Сначала сохраните заметку</string>
+    <string name="empty_name">Поле имени не заполнено</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

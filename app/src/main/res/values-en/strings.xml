@@ -13,4 +13,11 @@
     <string name="note_content">Note content...</string>
     <string name="choose_folder">Choosing a category</string>
     <string name="generate">Generate category</string>
+    <string name="save_txt">Save .txt file</string>
+    <string name="save_pdf">Save .pdf file</string>
+    <string name="save_jpg">Save .jpg file</string>
+    <string name="saved">Saved</string>
+    <string name="empty">Something is empty</string>
+    <string name="save_first">Save the note first</string>
+    <string name="empty_name">Name field is empty</string>
 </resources>

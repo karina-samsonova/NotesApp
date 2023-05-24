@@ -92,18 +92,35 @@
                 android:id="@+id/saveBtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_alignParentEnd="true"
-                android:layout_margin="10dp"
+                android:layout_toStartOf="@id/saveFileBtn"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="@null"
                 android:clickable="true"
                 android:focusable="true"
                 android:src="@drawable/save" />
+
+            <ImageView
+                android:id="@+id/saveFileBtn"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@null"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/dots_vertical" />
         </RelativeLayout>
 
         <FrameLayout
+            android:id="@+id/noteFrame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/updateToolbar">
+            android:layout_below="@id/updateToolbar"
+            android:background="@color/white">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
