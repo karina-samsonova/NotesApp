@@ -18,7 +18,7 @@ interface FolderNoteDao {
 
     @Query("SELECT id, title, content, date FROM " +
             "(SELECT note_id FROM folder_note WHERE folder_id = :query) a " +
-            "INNER JOIN note b ON b.id = a.note_id")
+            "INNER JOIN note b ON b.id = a.note_id ORDER BY id DESC")
     fun getFolderNotes(query: Int): LiveData<List<Note>>
 
     @Query("SELECT COUNT(folder_id) FROM folder_note WHERE folder_id = :query")
