@@ -1,4 +1,5 @@
 # NotesApp
+![Снимок экрана 2023-07-31 150729](https://github.com/karina-samsonova/NotesApp/assets/77845647/486986b1-3b49-46cb-8154-ef31fc117aac)
 ## Technology stack
 * Kotlin
 * Material Design
