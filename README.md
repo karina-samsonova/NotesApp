@@ -1,5 +1,5 @@
 # NotesApp
-**Technology stack
+##Technology stack
 * Kotlin
 * Material Design
 * Coroutines
@@ -13,7 +13,7 @@
 * Android Jetpack Components
 * Google ML Kit
 
-**Functionality
+##Functionality
 * Create, read, change, delete notes
 * Get all notes from the local database
 * Search notes
